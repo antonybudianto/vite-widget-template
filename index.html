@@ -7,10 +7,39 @@
     <link rel="stylesheet" href="dist/my-vue-lib.css" />
   </head>
   <body>
+    <div id="vue2-root">
+      <hello-world message="Hello, Vue 2!"></hello-world>
+    </div>
+    <hr />
     <div id="container"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
     <script src="dist/my-vue-lib.umd.js"></script>
     <script>
+      Vue.component('hello-world', {
+        template: `<div>
+          <h1>{{message}}</h1>
+          <div>count: {{counter}}</div>
+          <button @click="() => counter++">inc+</button>
+        </div>`,
+        props: {
+          message: {
+            type: String,
+            default: ''
+          }
+        },
+        data() {
+          return {
+            counter: 0
+          };
+        }
+      });
+      console.log('Vue2 version:', Vue.version)
+
+      new Vue({
+        el: '#vue2-root'
+      });
+
       MyVueLib.mount(document.getElementById("container"));
     </script>
   </body>
